@@ -15,7 +15,7 @@ An image manipulating program
 * Open the prject folder in your python editor (Canopy)
 * Change the working directory to your projrct folder in Canopy
 
-* run the python file and it should show the manipulated image
+* run the test-fotoshop.py file and it should show the manipulated image
 
 * to get changes from git hub by your partner run the following command in your project folder
 ```
@@ -28,6 +28,8 @@ An image manipulating program
   git commit -m ' your custome message here'
   git push origin master
 ```
+
+Or you can use the github desktop for commiting and pyshing
 
 ## refrences
 * http://www.effbot.org/imagingbook/
