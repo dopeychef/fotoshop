@@ -5,6 +5,12 @@ from PIL import ImageDraw
 from PIL import ImageFont
 from PIL import ImageOps
 
+class Deformer:
+    def getmesh(self, im):
+        x, y = im.size
+        return [((0, 0, x, y), (0, 0, x, 0, x, y, y, 0))]
+  
+
 
 ''' write the text passed over the image'''
 def writeWatermark(im,text2Write):
@@ -23,7 +29,35 @@ def writeWatermark(im,text2Write):
     del draw  
     return im
     
+def overlayImage(image,overlay):
+    sizeImage = image.size
+    #print(sizeImage)
 
+    sizeOverlay = overlay.size
+    #print(sizeOverlay)
+
+    box = (sizeImage[0]-sizeOverlay[0]-10,sizeImage[1]-sizeOverlay[1]-10)
+    image.paste(overlay,box,overlay)
+    return image
+
+#make it black and white
+def makeBlackAndWhite(image):
+    return image.convert('L')
+
+# image filters
+def addSpecialEffects(image):
+    #image = image.filter(ImageFilter.BLUR)
+    #image = image.filter(ImageFilter.FIND_EDGES)
+    image = image.filter(ImageFilter.EMBOSS)
+    return image
+    
+def deformImage(image):
+    return ImageOps.deform(image, deformer)
+    
+def addFrame(image):
+    return ImageOps.expand(image,border=30,fill='red')
+    
+          
 
 
 ''' main function that calls various functions '''
@@ -39,10 +73,10 @@ def __main():
     #image = addSpecialEffects(image)
     #image = overlayImage(image,overlay)
     #image = deformImage(image)
-    #image = addFrame(image)
+    image = addFrame(image)
     # display image on the screen
     image.show()
     
-    
+deformer = Deformer()
 cwd = os.getcwd()
 __main()
